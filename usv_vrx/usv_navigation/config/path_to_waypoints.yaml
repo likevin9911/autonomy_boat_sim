@@ -1,0 +1,3 @@
+markers:        true
+default_speed:  5
+thinning_value: 80
