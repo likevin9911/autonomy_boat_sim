@@ -1,6 +1,6 @@
-map_update_interval: 0.5
-maxUrange: 5 #max usable range
-maxRange: 20 #maximum range of sensor
+map_update_interval: 0.1
+maxUrange: 40 #max usable range
+maxRange: 50 #maximum range of sensor
 
 sigma: 0.05 
 kernelSize: 1
@@ -22,7 +22,7 @@ linearUpdate: 0.1
 angularUpdate: 0.05
 temporalUpdate: -1
 resampleThreshold: 0.5
-particles: 100
+particles: 30
 xmin: -10.0
 ymin: -10.0
 xmax: 10.0

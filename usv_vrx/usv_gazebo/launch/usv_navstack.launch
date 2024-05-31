@@ -1,16 +1,17 @@
 <?xml version="1.0"?>
 <launch>
-  
+  <!-- Notes -->
+  <!-- For GMAPPING: comment out "MAP", "AMCL", "MOVE_BASE", and "Global_planner" -->
 
   # Part of MOVE_BASE 
-  <!--arg name="cmd_vel_topic" default="/cmd_vel" /-->
+  <arg name="cmd_vel_topic" default="/cmd_vel" />
 
 
   <group ns="wamv">
 
     # Map 
-    <!--arg name="map_file" default="$(find usv_description)/world/test.yaml" />
-    <node pkg="map_server" name="map_server" type="map_server" args="$(find usv_description)/world/test.yaml" /-->
+    <!--arg name="map_file" default="$(find usv_description)/world/maze_edited_1.yaml" />
+    <node pkg="map_server" name="map_server" type="map_server" args="$(find usv_description)/world/maze_edited_1.yaml" /-->
 
     # AMCL
     <!--include file="$(find usv_gazebo)/launch/amcl.launch"/-->
@@ -18,7 +19,7 @@
     
 
     # Check Thruster
-    <!--node pkg="usv_navigation" type="move_base_cmd.py" name="cmd_vel_to_thrusters"/-->
+    <node pkg="usv_navigation" type="move_base_cmd.py" name="cmd_vel_to_thrusters"/>
 		
     #Run this with roslaunch usv_control control.launch
     <!--node pkg="global_planner" type="planner" name="global_planner" output="screen">
@@ -48,16 +49,21 @@
 
 
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+      <param name="base_global_planner" value="global_planner/GlobalPlanner" />
       <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+
       <rosparam file="$(find usv_gazebo)/config/costmap_common_params.yaml" command="load" ns="global_costmap"/>
       <rosparam file="$(find usv_gazebo)/config/costmap_common_params.yaml" command="load" ns="local_costmap"/>
       <rosparam file="$(find usv_gazebo)/config/local_costmap_params.yaml" command="load" />
       <rosparam file="$(find usv_gazebo)/config/global_costmap_params.yaml" command="load" />
       <rosparam file="$(find usv_gazebo)/config/move_base_params.yaml" command="load" />
       <rosparam file="$(find usv_gazebo)/config/dwa_local_planner_params.yaml" command="load" />
+      <rosparam file="$(find usv_gazebo)/config/global_planner_params.yaml" command="load" />
+
       <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
       <remap from="odom" to="$(arg odom_topic)"/>
-      <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
+      <remap from="global_planner/planner/plan" to="waypoints" />
+      <param name="DWAPlannerROS/min_vel_x" value="0.1" if="$(arg move_forward_only)" />
     </node-->
     
     

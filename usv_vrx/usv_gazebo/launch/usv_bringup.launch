@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <launch>
 
-	<!-- All variables which would be used later in the launch file URDF + world-->
+	<!-- No change for gmapping -->
 	<arg name="override_location" default="true" />
 	<arg name="x" default="0" />
 	<arg name="y" default="0" />
-	<arg name="yaw" default="0.229" />
+	<arg name="yaw" default="-3.14" />
 	<arg name="gui" default="true" />
 	<arg name="world_name" default="sandisland"/>
 	<arg name="thrust_config" default="T"/>
