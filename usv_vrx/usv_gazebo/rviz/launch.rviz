@@ -5,6 +5,7 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Map1
+        - /LaserScan1
         - /Map2
         - /Map3
       Splitter Ratio: 0.5
@@ -517,7 +518,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/ThirdPersonFollower
-      Distance: 102.10671997070312
+      Distance: 25.081003189086914
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -533,9 +534,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.9247972965240479
+      Pitch: 0.9247973561286926
       Target Frame: wamv/base_link
-      Yaw: 2.487220287322998
+      Yaw: 2.8922221660614014
     Saved: ~
 Window Geometry:
   Displays:

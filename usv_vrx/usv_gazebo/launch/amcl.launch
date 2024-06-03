@@ -10,21 +10,18 @@
   <arg name="initial_cov_yy" default="0.2" />
   <arg name="initial_cov_yawyaw" default="1.0" />
   <arg name="use_nav_core_server" default="false" />
-   
 
-
-<group ns="wamv">
   <!-- AMCL -->
   <node pkg="amcl" type="amcl" name="amcl">
 
-    <param name="min_particles"             value="500"/>
+    <param name="min_particles"             value="50.0"/>
     <param name="max_particles"             value="5000"/>
     <param name="kld_err"                   value="0.01"/>
     <param name="kld_z"                     value="0.99"/>
     <param name="update_min_d"              value="0.20"/>
     <param name="update_min_a"              value="0.50"/>
     <param name="resample_interval"         value="1"/>
-    <param name="transform_tolerance"       value="0.1" type="double"/>
+    <param name="transform_tolerance"       value="4.5" type="double"/> <!-- 4.5 (5+ is breaking point, >2.5 lower bound-->
     <param name="recovery_alpha_slow"       value="0.00"/>
     <param name="recovery_alpha_fast"       value="0.00"/>
     <param name="initial_pose_x"            value="$(arg initial_pose_x)"/>
@@ -60,7 +57,7 @@
     <param name="use_map_topic"             value="true"/>
     <param name="save_pose_rate"            value="1.0"/>
   </node>
-  </group>
+
 
    
     <!-- tf -->
