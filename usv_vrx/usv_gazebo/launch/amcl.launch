@@ -21,7 +21,7 @@
     <param name="update_min_d"              value="0.20"/>
     <param name="update_min_a"              value="0.50"/>
     <param name="resample_interval"         value="1"/>
-    <param name="transform_tolerance"       value="4.5" type="double"/> <!-- 4.5 (5+ is breaking point, >2.5 lower bound-->
+    <param name="transform_tolerance"       value="0.1" type="double"/> <!-- 4.5 (5+ is breaking point >2.5 lower bound-->
     <param name="recovery_alpha_slow"       value="0.00"/>
     <param name="recovery_alpha_fast"       value="0.00"/>
     <param name="initial_pose_x"            value="$(arg initial_pose_x)"/>
@@ -31,10 +31,12 @@
     <param name="/initial_cov_yy"           value="$(arg initial_cov_yy)" type="double" />
     <param name="/initial_cov_yawyaw"       value="$(arg initial_cov_yawyaw)" type="double" />
     <param name="gui_publish_rate"          value="50.0"/>
+    <param name="buffer_duration"           value="10.0" type="double" />
+
     
 
     <remap from="scan"                      to="$(arg scan_topic)"/>
-    <param name="laser_max_range"           value="40"/>
+    <param name="laser_max_range"           value="80"/> <!--from gmapping param-->
     <param name="laser_max_beams"           value="180"/>
     <param name="laser_z_hit"               value="0.5"/>
     <param name="laser_z_short"             value="0.05"/>

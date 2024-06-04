@@ -10,7 +10,7 @@ class WaypointNavigator:
         self.goal_pub = rospy.Publisher('/wamv/move_base_simple/goal', PoseStamped, queue_size=10)
         self.status_sub = rospy.Subscriber('/wamv/move_base/status', GoalStatusArray, self.status_callback)
         self.waypoints = [
-            (-20.179, 57.021),
+            (-39.436, 19.984)
             #(109.75, 54.5),
             #(44.684, 93.634),
             #(116.690, 19.649)  # Additional waypoints can be added here

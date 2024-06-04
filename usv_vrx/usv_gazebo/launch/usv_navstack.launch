@@ -5,6 +5,8 @@
 
   # Part of MOVE_BASE 
   <arg name="cmd_vel_topic" default="/cmd_vel" />
+  <node pkg="tf" type="static_transform_publisher" name="static_tf_pub" args="0.7 0 1.8 0 0 0 1 wamv/base_link wamv/lidar_wamv_link 100"/>
+
 
   <group ns="wamv">
 
