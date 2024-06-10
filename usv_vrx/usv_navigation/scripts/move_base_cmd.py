@@ -43,7 +43,7 @@ def thrusters_to_cmd_vel(left_thruster, right_thruster):
 
     # Define maximum velocities (adjust these as necessary)
     max_linear_velocity = 1.5  # Maximum linear velocity
-    max_angular_velocity = 0.1  # Maximum angular velocity
+    max_angular_velocity = 0.3  # Maximum angular velocity
 
     # Scale velocities if they exceed the maximum limits
     if abs(linear_velocity) > max_linear_velocity:

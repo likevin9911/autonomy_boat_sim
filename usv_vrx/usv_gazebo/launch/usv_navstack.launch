@@ -20,7 +20,7 @@
     
 
     # Check Thruster
-    <node pkg="usv_navigation" type="move_base_cmd.py" name="cmd_vel_to_thrusters"/>
+    <!--node pkg="usv_navigation" type="move_base_cmd.py" name="cmd_vel_to_thrusters"/-->
 		
     #Run this with roslaunch usv_control control.launch
     <!--node pkg="global_planner" type="planner" name="global_planner" output="screen">

@@ -15,7 +15,7 @@ def publish_initial_pose():
     pose.pose.pose.position.x = 0.0
     pose.pose.pose.position.y = 0.0
     pose.pose.pose.position.z = 0.0
-    quaternion = tf.transformations.quaternion_from_euler(0, 0, -2.95)
+    quaternion = tf.transformations.quaternion_from_euler(0, 0, -3.14)
     pose.pose.pose.orientation.x = quaternion[0]
     pose.pose.pose.orientation.y = quaternion[1]
     pose.pose.pose.orientation.z = quaternion[2]
