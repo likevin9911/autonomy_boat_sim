@@ -523,15 +523,15 @@
       <accelOffset>0.0 0.0 0.0</accelOffset>
       <accelDrift>0.0 0.0 0.0</accelDrift>
       <accelDriftFrequency>0.00027 0.00027 0.000027</accelDriftFrequency>
-      <accelGaussianNoise>0.0000686 0.0000686 0.0000686</accelGaussianNoise>
+      <accelGaussianNoise>0.00175 0.00192 0.00192</accelGaussianNoise> <!--Baseline-->
       <rateOffset>0.0 0.0 0.0</rateOffset>
       <rateDrift>0.0 0.0 0.0</rateDrift>
       <rateDriftFrequency>0.00027 0.00027 0.000027</rateDriftFrequency>
-      <rateGaussianNoise>0.0000662 0.0000662 0.0000662</rateGaussianNoise>
+      <rateGaussianNoise>0.011 0.011 0.011</rateGaussianNoise>
       <yawOffset>0.0</yawOffset>
       <yawDrift>0.0</yawDrift>
       <yawDriftFrequency>0.00027</yawDriftFrequency>
-      <yawGaussianNoise>0.000062</yawGaussianNoise>
+      <yawGaussianNoise>0.011</yawGaussianNoise>
     </plugin>
   </gazebo>
   <link name="gps_wamv_link">
@@ -583,10 +583,10 @@
       <referenceHeading>90</referenceHeading>
       <offset>0.0 0.0 0.0</offset>
       <drift>0.0 0.0 0.0</drift>
-      <gaussianNoise>0 0 0</gaussianNoise> <!--M9N GPS0.5 1 2-->
+      <gaussianNoise> 2 2 2</gaussianNoise> <!--M9N GPS 2-->
       <velocityOffset>0.0 0.0 0.0</velocityOffset>
       <velocityDrift>0.0 0.0 0.0</velocityDrift>
-      <velocityGaussianNoise>0 0 0 </velocityGaussianNoise><!-- 0.5 1 2-->
+      <velocityGaussianNoise>0.5 0.5 0.5</velocityGaussianNoise><!-- 0.5 spec-->
     </plugin>
   </gazebo>
   <!-- Monocular Camera -->

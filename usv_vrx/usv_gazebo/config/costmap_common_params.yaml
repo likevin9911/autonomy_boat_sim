@@ -11,7 +11,7 @@ obstacle_layer:
  combination_method: 1
 
  observation_sources: laser_scan_sensor 
- laser_scan_sensor: {sensor_frame: wamv/lidar_wamv_link, data_type: LaserScan, topic: sensors/lidars/lidar/scan
+ laser_scan_sensor: {sensor_frame: lidar_wamv_link, data_type: LaserScan, topic: sensors/lidars/lidar/scan
 , marking: true, clearing: true}
  #point_cloud_sensor: {sensor_frame: base_link, data_type: PointCloud, topic: topic_name, marking: true, clearing: true}
 

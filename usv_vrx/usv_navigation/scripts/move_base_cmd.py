@@ -24,8 +24,8 @@ left_thruster_value = 0.0
 right_thruster_value = 0.0
 
 # ROS Topics
-subscriberR_topic = '/wamv/thrusters/right_thrust_cmd'
-subscriberL_topic = '/wamv/thrusters/left_thrust_cmd'
+subscriberR_topic = '/thrusters/right_thrust_cmd'
+subscriberL_topic = '/thrusters/left_thrust_cmd'
 publisher_topic = '/cmd_vel'
 
 # ROS Publisher

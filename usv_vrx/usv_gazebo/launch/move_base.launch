@@ -4,7 +4,7 @@
   <arg name="odom_topic" default="odom" />
   <arg name="move_forward_only" default="false"/>
     
-  <group ns="wamv">
+
    
       <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
       <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
@@ -18,5 +18,5 @@
       <remap from="odom" to="$(arg odom_topic)"/>
       <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
     </node>
-  </group>
+
 </launch>

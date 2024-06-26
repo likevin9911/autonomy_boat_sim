@@ -2,7 +2,7 @@
 
 <launch>
   <!-- Arguments -->
-  <arg name="scan_topic"     default="/wamv/sensors/lidars/lidar/scan"/>
+  <arg name="scan_topic"     default="/sensors/lidars/lidar/scan"/>
   <arg name="initial_pose_x" default="0"/>
   <arg name="initial_pose_y" default="0"/>
   <arg name="initial_pose_a" default="-3.14"/>
@@ -53,7 +53,7 @@
     <param name="odom_alpha4"               value="0.025"/>
     <param name="odom_frame_id"             value="odom"/>
     <remap from ="odom"                     to="/robot_localization/odometry/filtered"/>
-    <param name="base_frame_id"             value="wamv/base_link"/>
+    <param name="base_frame_id"             value="base_link"/>
     <param name="global_frame_id"           value="map"/>
     <param name="use_map_topic"             value="true"/>
     <param name="use_sim_time"             value="true"/>

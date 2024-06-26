@@ -8,46 +8,34 @@
 	<arg name="yaw" default="-3.14" />
 	<arg name="gui" default="true" />
 	<arg name="world_name" default="sandisland"/>
-	<arg name="thrust_config" default="T"/>
+   <arg name="thrust_config" default="H" />
 	<arg name="verbose" default="false"/>
     
 
    <include file="$(find vrx_2019)/launch/$(arg world_name).launch">
-      <arg name="urdf"           value="$(find usv_description)/configs/usv_wamv.urdf"/>
+      <arg name="urdf"           value="$(find usv_description)/configs/mtu_usv.urdf"/>
       <arg name="x"              value="$(arg x)"                 if="$(arg override_location)" />
       <arg name="y"              value="$(arg y)"                 if="$(arg override_location)" />
       <arg name="Y"              value="$(arg yaw)"               if="$(arg override_location)"/>
       <arg name="gui"            value="$(arg gui)" />
-      <arg name="thrust_config"  value="$(arg thrust_config)"/>
+      <arg name="thrust_config"  value="$(arg thrust_config)" />
       <arg name="verbose"        value="$(arg verbose)"/>
    </include>
   	
   	
-   <node name="odom_relay" pkg="topic_tools" type="relay" args="wamv/robot_localization/odometry/filtered odom" />
-
-   <group ns="wamv">
-   	<!-- 3D LIDAR 
-   	<node pkg="usv_navigation" type="mapping" name="mapping" output="screen">
-         <param name="~width" value="1024" />
-         <param name="~resolution" value="0.4" />
-         <param name="~offset_x" value="0.0" /> 
-         <param name="~offset_y" value="-0.2" /> 
-         
-       </node>-->
+   <!--node name="odom_relay" pkg="topic_tools" type="relay" args="robot_localization/odometry/filtered odom" /-->
    	
-      	<node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
-          <remap from="cloud_in" to="sensors/lidars/lidar_wamv/points" />
-          <remap from="scan" to="sensors/lidars/lidar/scan" />
-        </node>
+   <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
+      <remap from="cloud_in" to="sensors/lidars/lidar_points" />
+      <remap from="scan" to="sensors/lidars/lidar/scan" />
+   </node>
        
-        <node name="odom_filtered_relay" pkg="topic_tools" type="relay" args="robot_localization/odometry/filtered odom" />
+   <node name="odom_filtered_relay" pkg="topic_tools" type="relay" args="robot_localization/odometry/filtered odom" />
        
-        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
-         <param name="publish_frequency" value="60" />
-         <param name="tf_prefix" value="wamv" />
-        </node>
-       
-        <node name="wamv_tf_expander" pkg="usv_navigation" type="wamv_tf_expander.py" />
-   </group>
+   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+      <param name="publish_frequency" value="60" />
+   </node>
+      
 
+   <node name="wamv_tf_expander" pkg="usv_navigation" type="wamv_tf_expander.py" />
 </launch>

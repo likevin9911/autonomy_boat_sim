@@ -10,7 +10,6 @@
     <!-- === wamv_camera === -->
       <xacro:wamv_camera y="0.1" x="0.75" Y="${radians(30)}" name="left_camera" />
       <xacro:wamv_camera y="-0.1" x="0.75" Y="${radians(-30)}" name="right_camera" />
-      <xacro:wamv_camera y="0" x="0.75" Y="${radians(0)}" name="middle_camera" />
 
     <!-- === lidar === -->
       <xacro:lidar P="0" type="32_beam" name="lidar_wamv" />

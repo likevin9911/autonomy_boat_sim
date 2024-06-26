@@ -19,7 +19,7 @@ class WaypointConverter:
 
         self.marker_id = 0
 
-        rospy.Subscriber("wamv/waypoints", Path, self.pathCallback)
+        rospy.Subscriber("waypoints", Path, self.pathCallback)
 
     def getStationMsg(self, pose1, pose2, dest_pose, duration, set_yaw):
         # Calculate angle vessel needs to be at
