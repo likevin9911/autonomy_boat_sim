@@ -4,8 +4,8 @@ from sensor_msgs.msg import NavSatFix
 
 class GPSCombiner:
     def __init__(self):
-        self.gps1_sub = rospy.Subscriber('/gps_left_gps/fix', NavSatFix, self.gps1_callback)
-        self.gps2_sub = rospy.Subscriber('/gps_right_gps/fix', NavSatFix, self.gps2_callback)
+        self.gps1_sub = rospy.Subscriber('/gps_left/gps/fix', NavSatFix, self.gps1_callback)
+        self.gps2_sub = rospy.Subscriber('/gps_right/gps/fix', NavSatFix, self.gps2_callback)
         self.combined_gps_pub = rospy.Publisher('/combined_gps/fix', NavSatFix, queue_size=10)
         
         self.gps1_data = None

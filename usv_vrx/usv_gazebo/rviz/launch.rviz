@@ -79,55 +79,46 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        front_left_camera_link:
+        front_mid_camera_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        front_left_camera_link_optical:
+        front_mid_camera_link_optical:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        front_left_camera_post_arm_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_left_camera_post_link:
+        front_mid_camera_post_arm_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        front_right_camera_link:
+        front_mid_camera_post_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        front_right_camera_link_optical:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        front_right_camera_post_arm_link:
+        gps_left_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        front_right_camera_post_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        gps_left_wamv_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        gps_right_wamv_link:
+        gps_right_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
         imu_wamv_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lateral_engine_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lateral_propeller_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -240,7 +231,7 @@ Visualization Manager:
       Value: true
     - Class: rviz/Image
       Enabled: true
-      Image Topic: /sensors/cameras/front_left_camera/image_raw
+      Image Topic: /sensors/cameras/front_mid_camera/image_raw
       Max Value: 1
       Median window: 5
       Min Value: 0
