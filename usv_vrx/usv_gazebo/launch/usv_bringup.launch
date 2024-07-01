@@ -13,7 +13,7 @@
     
 
    <include file="$(find vrx_2019)/launch/$(arg world_name).launch">
-      <arg name="urdf"           value="$(find usv_description)/configs/mtu_usv.urdf"/>
+      <arg name="urdf"           value="$(find usv_description)/configs/usv_mtu.urdf"/>
       <arg name="x"              value="$(arg x)"                 if="$(arg override_location)" />
       <arg name="y"              value="$(arg y)"                 if="$(arg override_location)" />
       <arg name="Y"              value="$(arg yaw)"               if="$(arg override_location)"/>

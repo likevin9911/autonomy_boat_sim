@@ -118,5 +118,5 @@
     <remap from="gps/fix" to="/combined_gps/fix" />
   </node>
 
-  <node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher" args="0 0 0 0 0 0 1 base_link odom" />
+  
 </launch>

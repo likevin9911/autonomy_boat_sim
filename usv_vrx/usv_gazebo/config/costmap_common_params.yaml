@@ -1,5 +1,5 @@
 robot_radius: 1.0
-transform_tolerance: 0.1
+transform_tolerance: 0.3
 map_type: costmap
 
 obstacle_layer:
