@@ -8,8 +8,8 @@
 	<arg name="yaw" default="-3.14" />
 	<arg name="gui" default="true" />
 	<arg name="world_name" default="sandisland"/>
-   <arg name="thrust_config" default="H" />
-	<arg name="verbose" default="false"/>
+   <arg name="thrust_config" default="T" />
+	<arg name="verbose" default="true"/>
     
 
    <include file="$(find vrx_2019)/launch/$(arg world_name).launch">
@@ -24,18 +24,21 @@
   	
   	
    <!--node name="odom_relay" pkg="topic_tools" type="relay" args="robot_localization/odometry/filtered odom" /-->
-   	
-   <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
-      <remap from="cloud_in" to="sensors/lidars/lidar_points" />
-      <remap from="scan" to="sensors/lidars/lidar/scan" />
-   </node>
-       
-   <node name="odom_filtered_relay" pkg="topic_tools" type="relay" args="robot_localization/odometry/filtered odom" />
-       
-   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
-      <param name="publish_frequency" value="60" />
-   </node>
-      
+   
+  
+      <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
+         <remap from="cloud_in" to="sensors/lidars/lidar_points" />
+         <remap from="scan" to="sensors/lidars/lidar/scan" />
+      </node>
+          
+      <node name="odom_filtered_relay" pkg="topic_tools" type="relay" args="robot_localization/odometry/filtered odom" />
+          
+      <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+         <param name="publish_frequency" value="60" />
+         <!--param name"tf_prefix" value="wamv"/-->
+      </node>
+         
 
-   <node name="wamv_tf_expander" pkg="usv_navigation" type="wamv_tf_expander.py" />
+      <node name="wamv_tf_expander" pkg="usv_navigation" type="wamv_tf_expander.py" />
+
 </launch>

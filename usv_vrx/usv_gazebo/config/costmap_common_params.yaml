@@ -1,5 +1,5 @@
 robot_radius: 1.0
-transform_tolerance: 0.3
+transform_tolerance: 0.1
 map_type: costmap
 
 obstacle_layer:
@@ -23,3 +23,6 @@ inflation_layer:
 static_layer:
   enabled:              true
   map_topic:            "map"
+
+global_frame: map
+robot_base_frame: base_link  

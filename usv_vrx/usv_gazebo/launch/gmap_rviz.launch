@@ -2,8 +2,8 @@
     <!-- SLAM: Gmapping, Cartographer, Hector, Karto, Frontier_exploration, RTAB-Map -->
   <arg name="set_odom_frame" default="odom"/>
   <arg name="set_map_frame"  default="map"/>
-  <arg name="set_base_frame" default="wamv/base_link"/>
-  <arg name="scan_topic" default="wamv/sensors/lidars/lidar/scan"/>
+  <arg name="set_base_frame" default="base_link"/>
+  <arg name="scan_topic" default="sensors/lidars/lidar/scan"/>
   
 
   <!-- Gmapping -->
