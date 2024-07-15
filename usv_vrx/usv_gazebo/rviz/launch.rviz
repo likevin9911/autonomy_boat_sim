@@ -253,7 +253,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: Intensity
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Min Color: 0; 0; 0
@@ -268,7 +268,7 @@ Visualization Manager:
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -538,9 +538,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6647968888282776
+      Pitch: 0.5347971320152283
       Target Frame: base_link
-      Yaw: 3.177233934402466
+      Yaw: 0.44723406434059143
     Saved: ~
 Window Geometry:
   Displays:
@@ -561,4 +561,4 @@ Window Geometry:
     collapsed: true
   Width: 1200
   X: 460
-  Y: 0
+  Y: 27

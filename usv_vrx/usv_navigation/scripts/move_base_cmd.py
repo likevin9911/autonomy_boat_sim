@@ -38,8 +38,8 @@ def thrusters_to_cmd_vel(left_thruster, right_thruster):
     cmd_vel_msg = Twist()
 
     # Calculate linear and angular velocities
-    linear_velocity = (left_thruster + right_thruster) / 1.95
-    angular_velocity = (right_thruster - left_thruster) / 1.95
+    linear_velocity = (left_thruster + right_thruster) / 2
+    angular_velocity = (right_thruster - left_thruster) / 2
 
     # Define maximum velocities (adjust these as necessary)
     max_linear_velocity = 1.5  # Maximum linear velocity
