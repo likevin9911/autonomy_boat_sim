@@ -39,6 +39,6 @@
       </node>
          
 
-      <node name="wamv_tf_expander" pkg="usv_navigation" type="wamv_tf_expander.py" />
+      <!--node name="wamv_tf_expander" pkg="usv_navigation" type="wamv_tf_expander.py" /-->
 
 </launch>

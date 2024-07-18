@@ -141,10 +141,10 @@ include_directories(
 
 add_executable(wamv_course_controller
   src/wamv_course_controller_node.cpp
-  src/CourseController.cpp
+  src/HCourseController.cpp
   src/SimplePID.cpp
-  src/ThrustController.cpp
-  src/ThrustSM.cpp
+  src/HThrustController.cpp
+  src/HThrustSM.cpp
 )
 target_link_libraries(wamv_course_controller ${catkin_LIBRARIES})
 add_dependencies(wamv_course_controller ${catkin_EXPORTED_TARGETS})

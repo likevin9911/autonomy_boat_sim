@@ -1,5 +1,8 @@
-robot_radius: 1.0
-transform_tolerance: 0.1
+footprint: [[-0.37, -0.3], [-0.37, 0.3], [0.37, 0.3], [0.37, -0.3]] #MO tuned
+footprint_padding: 0.01
+robot_base_frame: base_link
+
+resolution: 0.02 #MO Tuned
 map_type: costmap
 
 obstacle_layer:
@@ -22,7 +25,7 @@ inflation_layer:
 
 static_layer:
   enabled:              true
-  map_topic:            "map"
+  map_topic:            map
+  subscribe_to_updates: true
 
-global_frame: map
-robot_base_frame: base_link  
+

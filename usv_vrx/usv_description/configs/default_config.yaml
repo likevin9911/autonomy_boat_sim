@@ -346,7 +346,7 @@
   <gazebo>
     <plugin filename="libusv_gazebo_thrust_plugin.so" name="wamv_gazebo_thrust" xmlns:xacro="http://ros.org/wiki/xacro">
       <cmdTimeout>1.0</cmdTimeout>
-      <robotNamespace>wamv</robotNamespace>
+      #<!--robotNamespace>wamv</robotNamespace-->
       <thruster>
         <!-- Required Parameters -->
         <linkName>left_propeller_link</linkName>

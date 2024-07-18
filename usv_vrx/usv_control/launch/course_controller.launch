@@ -15,7 +15,7 @@
       <remap from="/right_thrust_angle" to="thrusters/right_thrust_angle"/>
       <remap from="/left_thrust_cmd"    to="thrusters/left_thrust_cmd"/>
       <remap from="/left_thrust_angle" to="thrusters/left_thrust_angle"/>
-
+      
     </node>
 
 </launch>

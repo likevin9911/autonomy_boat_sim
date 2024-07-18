@@ -1,5 +1,5 @@
 #include "ros/ros.h"
-#include "CourseController.hpp"
+#include "HCourseController.hpp"
 
 bool hbeat_received_;
 bool continuous_hb_received_; // for logging purposes
@@ -7,7 +7,7 @@ bool continuous_hb_received_; // for logging purposes
 void hbeatCb(const usv_msg::Course::ConstPtr& msg)
 {
   if (continuous_hb_received_==false){
-    ROS_INFO("CourseController: Heartbeat recieved, thrusters re-enabled.");
+    ROS_INFO("HCourseController: Heartbeat recieved, thrusters re-enabled.");
     continuous_hb_received_=true;
   }
   hbeat_received_ = true;
@@ -18,7 +18,7 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "wamv_course_controller");
   ros::NodeHandle nh("~");
 
-  usv_vrx::CourseController course_controller(nh);
+  usv_vrx::HCourseController course_controller(nh);
 
   float heartbeat_duration, PID_rate;
   ros::param::get("~heartbeat_duration", heartbeat_duration);
@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 
   // Set up heartbeat timer
   hbeat_received_ = false;
-  ROS_INFO("CourseController: Startup: waiting for heartbeat...");
+  ROS_INFO("HCourseController: Startup: waiting for heartbeat...");
   ros::Subscriber sub_hbeat = nh.subscribe("/course_cmd", 1, hbeatCb);
   double hbeat_target_time = ros::Time::now().toSec() + heartbeat_duration;  
 
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
       else
       {
         if (continuous_hb_received_==true){
-          ROS_INFO("CourseController: Heartbeat lost - Thrusters disabled.");
+          ROS_INFO("HCourseController: Heartbeat lost - Thrusters disabled.");
           continuous_hb_received_=false;
         }
         course_controller.enableThrusters(false); // Tell vessel to stop

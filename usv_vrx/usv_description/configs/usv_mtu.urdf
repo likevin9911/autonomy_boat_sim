@@ -278,7 +278,7 @@
         <maxForceRev>-100.0</maxForceRev>
         <maxAngle>1.5707963267948966</maxAngle>
       </thruster>
-      
+     
     </plugin>
   </gazebo>
   <!--Gazebo Plugin for simulating WAM-V dynamics-->
@@ -500,7 +500,7 @@
       <gaussianNoise>0 0 0</gaussianNoise>
       <velocityOffset>0.0 0.0 0.0</velocityOffset>
       <velocityDrift>0.0 0.0 0.0</velocityDrift>
-      <velocityGaussianNoise>0.0 0.0 0.0</velocityGaussianNoise>
+      <velocityGaussianNoise>0 0 0</velocityGaussianNoise>
     </plugin>
   </gazebo>
   <link name="gps_right_link">
@@ -551,7 +551,7 @@
       <gaussianNoise>0 0 0</gaussianNoise>
       <velocityOffset>0.0 0.0 0.0</velocityOffset>
       <velocityDrift>0.0 0.0 0.0</velocityDrift>
-      <velocityGaussianNoise>0.0 0.0 0.0</velocityGaussianNoise>
+      <velocityGaussianNoise>0 0 0</velocityGaussianNoise>
     </plugin>
   </gazebo>
   <link name="imu_wamv_link">

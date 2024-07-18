@@ -1,4 +1,4 @@
-image: blank_map_with_obstacle.pgm
+image: blank_map_resized.pgm
 resolution: 0.050000
 origin: [-150.000000, -150.000000, 0.000000]
 negate: 0

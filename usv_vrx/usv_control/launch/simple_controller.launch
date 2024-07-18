@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="usv_control" type="simple_controller.py" name="simple_controller" output="screen"/>
+</launch>
+

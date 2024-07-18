@@ -8,29 +8,31 @@
  
 
   <!-- Map Server -->
-  <node pkg="map_server" name="map_server" type="map_server" args="$(find usv_description)/world/turtle.yaml" >
+  <node pkg="map_server" name="map_server" type="map_server" args="$(find usv_description)/world/blank_map_with_obstacle_resized.yaml" >
   <param name="frame_id" value="map"/>
   </node>
 
-  <!-- AMCL -->
-  <!--include file="$(find usv_gazebo)/launch/amcl.launch"/-->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 map odom" />
+
+  <!-- AMCL 
+  <include file="$(find usv_gazebo)/launch/amcl.launch"/>-->
 
 
   # Check Thruster
   <!--node pkg="usv_navigation" type="move_base_cmd.py" name="cmd_vel_to_thrusters"/-->
 	
   #Run this with roslaunch usv_control control.launch
-  <!--node pkg="global_planner" type="planner" name="global_planner" output="screen">
-    <param name="planner/old_navfn_behavior" value="true" />
-    <param name="planner/use_quadratic" value="false" />
-    <param name="planner/use_dijkstra" value="false" />
+  <node pkg="global_planner" type="planner" name="global_planner" output="screen">
+    <param name="planner/old_navfn_behavior" value="false" />
+    <param name="planner/use_quadratic" value="true" />
+    <param name="planner/use_dijkstra" value="true" />
     <param name="planner/use_grid_path" value="false" />
     <param name="planner/allow_unknown" value="true" />
     <param name="planner/planner_window_x" value="10.0" />
     <param name="planner/planner_window_y" value="10.0" />
     <param name="planner/default_tolerance" value="0" />
     <param name="planner/publish_scale" value="100" />
-    <param name="costmap/footprint" value="[[-4, -2.4], [4, -2.4], [4, 2.4], [-4,2.4]]" />
+    <param name="costmap/footprint" value="[[-1.5, -0.8], [1.5, -0.8], [1.5, 0.8], [-1.5,0.8]]" />
     <param name="costmap/height" value="100" />
     <param name="costmap/width" value="100" />
     <param name="costmap/robot_radius" value="7.0" />
@@ -38,15 +40,16 @@
     <param name="costmap/inflation_layer/inflation_radius" value="3.5" />
     <param name="costmap/inflation_layer/cost_scaling_factor" value="1" />
     <remap from="global_planner/planner/plan" to="waypoints" />
-  </node-->
+  </node>
   
   <arg name="odom_topic" default="/odom" />  
   <arg name="move_forward_only" default="false"/>
 
   <!-- Move Base + roslaunch vrx_gazebo usv_keydrive.launch -->
-  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+  <!--node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <param name="base_global_planner" value="global_planner/GlobalPlanner" />
     <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+
     <rosparam file="$(find usv_gazebo)/config/costmap_common_params.yaml" command="load" ns="global_costmap"/>
     <rosparam file="$(find usv_gazebo)/config/costmap_common_params.yaml" command="load" ns="local_costmap"/>
     <rosparam file="$(find usv_gazebo)/config/local_costmap_params.yaml" command="load" />
@@ -54,11 +57,17 @@
     <rosparam file="$(find usv_gazebo)/config/move_base_params.yaml" command="load" />
     <rosparam file="$(find usv_gazebo)/config/dwa_local_planner_params.yaml" command="load" />
     <rosparam file="$(find usv_gazebo)/config/global_planner_params.yaml" command="load" />
+
+    <param name="global_costmap/robot_base_frame" value="base_link"/>
+    <param name="global_costmap/global_frame" value="map"/>
+    <param name="local_costmap/robot_base_frame" value="base_link"/>
+    <param name="local_costmap/global_frame" value="odom"/>
+
     <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
     <remap from="odom" to="$(arg odom_topic)"/>
     <remap from="global_planner/planner/plan" to="waypoints" />
     <param name="DWAPlannerROS/min_vel_x" value="0.1" if="$(arg move_forward_only)" />
-  </node>
+  </node-->
   
   <!-- Path to Waypoints -->
   <arg name="ptw_config_file" value="$(find usv_navigation)/config/path_to_waypoints.yaml" />
