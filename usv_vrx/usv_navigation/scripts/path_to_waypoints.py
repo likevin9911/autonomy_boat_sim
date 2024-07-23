@@ -63,42 +63,57 @@ class WaypointConverter:
             self.marker_id += 1
 
     def pathCallback(self, path_msg):
-        if len(path_msg.poses) == 0:
+        num_poses = len(path_msg.poses)
+        if num_poses == 0:
+            rospy.logwarn("Received empty path.")
             return
 
-        wp_route_msg = WaypointRoute() # WaypointRoute msg
+        wp_route_msg = WaypointRoute()  # WaypointRoute msg
         wp_route_msg.speed = self.speed
-        count = 0
 
-        first_wp_msg = self.getStationMsg( # Get first station
-            path_msg.poses[0].pose, path_msg.poses[10].pose,
-            path_msg.poses[0].pose, 2.50, True)
+        # Check if there are at least 11 poses, if not use the available poses
+        if num_poses > 10:
+            first_wp_msg = self.getStationMsg(
+                path_msg.poses[0].pose, path_msg.poses[10].pose,
+                path_msg.poses[0].pose, 2.50, True)
+        else:
+            first_wp_msg = self.getStationMsg(
+                path_msg.poses[0].pose, path_msg.poses[-1].pose,
+                path_msg.poses[0].pose, 2.50, True)
+
         wp_route_msg.waypoints.append(first_wp_msg)
         self.pubMarker(first_wp_msg.pose)
 
+        count = 0
         for pose_stamped in path_msg.poses:
-            count += 1 # Put at start to avoid setting the immediate waypoint
-
+            count += 1
             if count % self.thinning_value == 0:
-                wp_msg = Waypoint() # Waypoint msg
+                wp_msg = Waypoint()  # Waypoint msg
                 wp_msg.nav_type = Waypoint.NAV_WAYPOINT
                 wp_msg.pose = pose_stamped.pose
                 self.pubMarker(wp_msg.pose)
-                wp_route_msg.waypoints.append(wp_msg) # Append wp to route
+                wp_route_msg.waypoints.append(wp_msg)  # Append wp to route
 
         half_thin_value = round(self.thinning_value / 2)
-
         # Remove current last waypoint if too close to actual last waypoint
-        if (len(path_msg.poses) % self.thinning_value) < half_thin_value:
+        if (num_poses % self.thinning_value) < half_thin_value:
             wp_route_msg.waypoints.pop()
 
-        last_wp_msg = self.getStationMsg( # Get last station
-            path_msg.poses[-11].pose, path_msg.poses[-1].pose,
-            path_msg.poses[-1].pose, -1, False)
+        # Check if there are at least 11 poses, if not use the available poses
+        if num_poses > 10:
+            last_wp_msg = self.getStationMsg(
+                path_msg.poses[-11].pose, path_msg.poses[-1].pose,
+                path_msg.poses[-1].pose, -1, False)
+        else:
+            last_wp_msg = self.getStationMsg(
+                path_msg.poses[0].pose, path_msg.poses[-1].pose,
+                path_msg.poses[-1].pose, -1, False)
+
         wp_route_msg.waypoints.append(last_wp_msg)
         self.pubMarker(last_wp_msg.pose)
 
         self.wp_cmd_pub.publish(wp_route_msg)
+
 
 if __name__=="__main__":
     rospy.init_node("path_to_waypoints")

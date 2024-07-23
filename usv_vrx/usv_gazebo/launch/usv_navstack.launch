@@ -75,6 +75,14 @@
     <rosparam command="load" file="$(arg ptw_config_file)" />
   </node>
 
+  <node pkg="usv_navigation" type="waypoint_reached_publisher.py" name="waypoint_reached_publisher" output="screen">
+    <param name="waypoint_topic" value="/waypoints" />
+    <param name="waypoint_reached_topic" value="/waypoint_reached" />
+    <param name="position_topic" value="/ground_truth" />
+    <param name="use_sim_time" value="true"/>
+
+  </node>
+
   <!-- Suppress tf warnings -->
   <rosparam param="silent_tf_failure">true</rosparam>
 

@@ -14,14 +14,14 @@ reconfig_duration:      1.0  # secs
 station_tolerance_ang:  0.175  # rad (0.175 rad ~= 10 deg)
 
 # Linear PID controller gains
-lin_Kp: 0.25
+lin_Kp: 0.5
 lin_Ki: 0.0
 lin_Kd: 0.1
 
 # Angular PID controller gains
 ang_Kp: 0.8
 ang_Ki: 0.0
-ang_Kd: 1.0
+ang_Kd: 0.5
 
 # Station PID controller gains
 stn_Kp: 0.2

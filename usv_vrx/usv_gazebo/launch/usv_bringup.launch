@@ -5,7 +5,7 @@
 	<arg name="override_location" default="true" />
 	<arg name="x" default="0" />
 	<arg name="y" default="0" />
-	<arg name="yaw" default="-3.14" />
+	<arg name="yaw" default="0" />
 	<arg name="gui" default="true" />
 	<arg name="world_name" default="sandisland"/>
    <arg name="thrust_config" default="T" />

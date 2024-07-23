@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import rospy
-from usv_msg.msg import WaypointRoute, Waypoint, WaypointReached
 from geometry_msgs.msg import PoseStamped, Pose, Point, Quaternion
 from nav_msgs.msg import Path
 import subprocess
@@ -31,11 +30,9 @@ waypoints = [
     {'x': 0, 'y': 0, 'z': 0.0, 'ox': 0.0, 'oy': 0.0, 'oz': 0.0, 'ow': 1.0, 'nav_type': 1, 'station_duration': -1.0, 'speed': 2.0}
 ]
 
-current_waypoint_index = 0  # Track the current waypoint index
-
 def publish_waypoint(pub, waypoint):
     path = Path()
-    path.header.frame_id = "map"  # Assuming the frame_id that your system uses
+    path.header.frame_id = "map"
     path.header.stamp = rospy.Time.now()
 
     pose_stamped = PoseStamped()
@@ -48,40 +45,23 @@ def publish_waypoint(pub, waypoint):
     pub.publish(path)
     rospy.loginfo(f"Published waypoint at {waypoint['x']}, {waypoint['y']}")
 
-def waypoint_reached_callback(msg):
-    global current_waypoint_index, waypoint_pub
-    rospy.loginfo(f"Waypoint reached callback triggered with message: {msg}")
-    if msg.reached:
-        rospy.loginfo(f"Waypoint {current_waypoint_index} reached.")
-        current_waypoint_index += 1  # Move to the next waypoint
-        if current_waypoint_index < len(waypoints):  # Check if more waypoints are available
-            rospy.loginfo(f"Publishing next waypoint: {waypoints[current_waypoint_index]}")
-            publish_waypoint(waypoint_pub, waypoints[current_waypoint_index])
-        else:
-            rospy.loginfo("All waypoints have been reached.")
-            if rosbag_process:
-                rosbag_process.terminate()
-                rosbag_process.wait()  # Ensure the process has terminated before continuing
-            rospy.signal_shutdown("All waypoints reached.")
-
 def main():
-    global waypoint_pub, rosbag_process
     rospy.init_node('waypoint_publisher')
     waypoint_pub = rospy.Publisher('/waypoints', Path, queue_size=10)
-    rospy.Subscriber('/waypoint_reached', WaypointReached, waypoint_reached_callback)
-
-    topics = load_topics('topics.txt')  # Assume topics.txt is in the same directory
+    
+    topics = load_topics('topics.txt')  # Load topics from file
     bag_name = input("Enter the name for the rosbag: ")
-
-    rospy.loginfo("Waiting for the first waypoint to be published...")
-    input("Press Enter to continue...")
     rosbag_process = start_rosbag_record(bag_name, topics)
 
-    if waypoints:
-        publish_waypoint(waypoint_pub, waypoints[0])  # Publish the first waypoint
-
-    rospy.spin()  # Keep the node alive to listen for callback events
-    
+    try:
+        for waypoint in waypoints:
+            publish_waypoint(waypoint_pub, waypoint)
+            input("Press Enter to continue to the next waypoint...")
+    finally:
+        if rosbag_process:
+            rosbag_process.terminate()
+            rosbag_process.wait()  # Ensure the process has terminated
+        rospy.signal_shutdown("Manual waypoint publishing complete.")
 
 if __name__ == '__main__':
     try:
