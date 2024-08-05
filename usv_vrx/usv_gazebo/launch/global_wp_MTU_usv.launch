@@ -1,0 +1,18 @@
+<launch>
+  <!-- Launch the USV Gazebo bringup without GUI -->
+  <include file="$(find usv_gazebo)/launch/usv_bringup.launch">
+    <arg name="gui" value="false"/>
+  </include>
+
+  <!-- Launch RViz for visualization -->
+  <include file="$(find usv_gazebo)/launch/rviz.launch" />
+
+  <!-- Launch the navigation stack for the USV -->
+  <include file="$(find usv_gazebo)/launch/usv_navstack_triple_ekf.launch" /> <!--change as needed-->
+
+  <!-- Launch the control mechanisms for the USV -->
+  <include file="$(find usv_control)/launch/control.launch" />
+  <!-- <include file="$(find usv_control)/launch/simple_controller.launch" /> -->
+
+</launch>
+

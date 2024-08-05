@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="WAM-V">
+  <xacro:arg name="namespace" default="wamv"/>  
+  <xacro:property name="namespace" value="$(arg namespace)" scope="global" /> 
+  <xacro:macro name="main_collisions" params="prefix reflect:=1">
+  
+    <!-- Main float -->
+    <collision name="${prefix}_float">
+      <origin xyz="0.0745 ${0.575*reflect} 0.21" rpy="${0*reflect} 1.57 0" />
+      <geometry>
+        <cylinder length="2.1" radius="0.21" />
+      </geometry>
+    </collision>
+
+    <collision name="${prefix}_front_float">
+      <origin xyz="1 ${0.575*reflect} 0.25" rpy="${0*reflect} 1.38 0" />
+      <geometry>
+        <cylinder length="0.8" radius="0.17" />
+      </geometry>
+    </collision>
+
+    <!-- Beam -->
+    <collision name="${prefix}_beam">
+      <origin xyz="0.13 ${0.585*reflect} 0.52" rpy="${0*reflect} 0 0" />
+      <geometry>
+        <box size="2.23 0.07 0.2" />
+      </geometry>
+    </collision>
+  </xacro:macro>
+
+  <!-- base link -->
+  <link name="${namespace}/base_link">
+  </link>
+
+  <joint name="${namespace}/dummy_joint" type = "fixed">
+    <parent link="${namespace}/base_link"/>
+    <child link="${namespace}/dummy_link"/>
+  </joint>
+
+  <link name="${namespace}/dummy_link">
+    <visual>
+      <origin xyz="-1.5 0.96 -0.0" rpy="1.57 0 0" />
+      <geometry>
+        <mesh filename="package://wamv_description/models/pontoon-base/mesh/FrameAndDecking.dae" scale="0.026 0.026 0.026"/> 
+      </geometry>
+    </visual>
+
+    <!-- Left base collisions -->
+    <xacro:main_collisions prefix="left" reflect="1" />
+
+    <!-- Right side collisions -->
+    <xacro:main_collisions prefix="right" reflect="-1" />
+
+     <!-- Top base -->
+    <collision name="top_base">
+      <origin xyz="0.13 -0 0.59" rpy="0 0 0" />
+      <geometry>
+        <box size="2.23 1.24 0.08" />
+      </geometry>
+    </collision>
+    
+    <inertial>
+      <!-- From WAM-V spec sheet -->
+      <mass value="180.0"/>
+      <inertia ixx="120.0" ixy="0.0" ixz="0.0" iyy="393" iyz="0.0" izz="446.0"/>
+    </inertial>
+  </link>
+
+</robot>

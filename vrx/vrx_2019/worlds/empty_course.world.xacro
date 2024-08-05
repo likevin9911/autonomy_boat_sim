@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<!-- World containing sandisland model and some course challenges -->
+<sdf version="1.6" xmlns:xacro="http://ros.org/wiki/xacro">
+  <world name="robotx_example_course">
+    <xacro:include filename="$(find vrx_2019)/worlds/sandisland.xacro" />
+    <xacro:sandisland />
+    <!--Waves-->
+    <xacro:include filename="$(find wave_gazebo)/world_models/ocean_waves/model.xacro"/>
+    <xacro:ocean_waves/>
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    
+    <!--<include>
+      <uri>model://obstacle_course0</uri>
+      <pose>66.66 122.88 0.157 0 0 -1.12</pose>
+    </include>
+    <include>
+      <uri>model://robotx_light_buoy</uri>
+      <pose>113.6 84.68 0.37 0 0 0</pose>
+    </include>
+    
+    <include>
+      <uri>model://dock_2022</uri>
+      <pose>137.07 81.75 0.0 0 0 -1</pose>
+    </include>
+    
+    <include>
+      <uri>model://dock_2018_base_dynamic</uri>
+      <pose>114.44 73 -0.1585 -0.002089 0.000437 -1</pose>
+    </include>-->
+    
+ 
+    <xacro:include filename="$(find vrx_gazebo)/worlds/xacros/usv_wind_plugin.xacro"/>
+    <xacro:usv_wind_gazebo>
+      <wind_objs>
+        <wind_obj>
+          <name>wamv</name>
+          <link_name>wamv/base_link</link_name>
+          <coeff_vector>.5 .5 .33</coeff_vector>
+        </wind_obj>
+      </wind_objs>
+    </xacro:usv_wind_gazebo>
+  </world>
+</sdf>
+
+
+    
+    <!--<include>
+      <uri>model://obstacles_phase2_0</uri>
+      <pose>127 84 0.145 0 0 0.55</pose>
+    </include>-->
+    
+    <!--<include>
+      <uri>model://obstacles_phase2_1</uri>
+      <pose>146 59 0 0 0 2.16</pose>
+    </include>-->
+ 
+     <!--<include>
+      <uri>model://obstacles_phase2_2</uri>
+      <pose>182 40 0.13 0 0 0 0.55</pose>
+    </include>-->
+ 
+    
+  

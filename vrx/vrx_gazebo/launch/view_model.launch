@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+  <param name="robot_description" command="$(find xacro)/xacro $(find wamv_description)/urdf/wamv_base.urdf.xacro"/>
+  
+  <!--param name="robot_description" command="$(find xacro)/xacro $(find asv_gazebo)/urdf/asv_gazebo.urdf.xacro"/-->
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+  <node ns="wamv" pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher"/>
+
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find wamv_description)/rviz/view_model.rviz"/>
+</launch>
+
