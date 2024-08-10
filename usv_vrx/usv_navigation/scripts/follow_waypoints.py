@@ -7,8 +7,8 @@ from actionlib_msgs.msg import GoalStatusArray
 class WaypointNavigator:
     def __init__(self):
         rospy.init_node('waypoint_navigator', anonymous=True)
-        self.goal_pub = rospy.Publisher('/wamv/move_base_simple/goal', PoseStamped, queue_size=10)
-        self.status_sub = rospy.Subscriber('/wamv/move_base/status', GoalStatusArray, self.status_callback)
+        self.goal_pub = rospy.Publisher('/move_base_simple/goal', PoseStamped, queue_size=10)
+        self.status_sub = rospy.Subscriber('/move_base/status', GoalStatusArray, self.status_callback)
         self.waypoints = [
             (-37.868, 18.045)
             #(109.75, 54.5),

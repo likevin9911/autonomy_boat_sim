@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import rospy
 from sensor_msgs.msg import NavSatFix
+from filterpy.kalman import KalmanFilter
+import numpy as np
 
 class GPSCombiner:
     def __init__(self):
@@ -10,6 +12,17 @@ class GPSCombiner:
         
         self.gps1_data = None
         self.gps2_data = None
+
+        # Initialize Kalman Filter
+        self.kf = KalmanFilter(dim_x=2, dim_z=2)
+        self.kf.F = np.array([[1., 0.],
+                              [0., 1.]])  # state transition matrix
+        self.kf.H = np.array([[1., 0.],
+                              [0., 1.]])  # Measurement function
+        self.kf.R = np.array([[2., 0.],  # Measurement uncertainty
+                              [0., 2.]])
+        self.kf.P *= 1000.                # covariance matrix
+        self.kf.Q = np.eye(2) * 0.1       # process noise
 
     def gps1_callback(self, data):
         self.gps1_data = data
@@ -24,15 +37,18 @@ class GPSCombiner:
             # Simple average of the positions
             avg_lat = (self.gps1_data.latitude + self.gps2_data.latitude) / 2
             avg_lon = (self.gps1_data.longitude + self.gps2_data.longitude) / 2
-            avg_alt = (self.gps1_data.altitude + self.gps2_data.altitude) / 2
+
+            # Update Kalman Filter
+            self.kf.predict()  # Predict the next state
+            self.kf.update([avg_lat, avg_lon])  # Update with measurement
 
             # Create combined NavSatFix data
             combined_data = NavSatFix()
             combined_data.header.stamp = rospy.Time.now()
             combined_data.header.frame_id = "base_link"
-            combined_data.latitude = avg_lat
-            combined_data.longitude = avg_lon
-            combined_data.altitude = avg_alt
+            combined_data.latitude = self.kf.x[0]
+            combined_data.longitude = self.kf.x[1]
+            combined_data.altitude = (self.gps1_data.altitude + self.gps2_data.altitude) / 2  # Simple average for altitude
 
             self.combined_gps_pub.publish(combined_data)
 
@@ -40,3 +56,4 @@ if __name__ == '__main__':
     rospy.init_node('gps_combiner', anonymous=True)
     gps_combiner = GPSCombiner()
     rospy.spin()
+

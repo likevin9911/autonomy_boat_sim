@@ -8,7 +8,7 @@
 	<arg name="yaw" default="3.14" />
 	<arg name="gui" default="true" />
 	<arg name="world_name" default="sandisland"/>
-   <arg name="thrust_config" default="T" />
+   <arg name="thrust_config" default="H" />
 	<arg name="verbose" default="true"/>
     
 

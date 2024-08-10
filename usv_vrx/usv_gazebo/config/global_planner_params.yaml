@@ -18,7 +18,7 @@ GlobalPlanner:
 
 
 costmap: 
-  footprint: [[-4, -2.4], [4, -2.4], [4, 2.4], [-4,2.4]]
+  footprint: [[-8, -4.8], [8, -4.8], [8, 4.8], [-8, 4.8]]
   height: 100
   width: 100
   robot_radius: 7.0

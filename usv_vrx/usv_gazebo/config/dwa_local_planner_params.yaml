@@ -5,17 +5,17 @@ DWAPlannerROS:
 
 # The velocity when robot is moving in a straight line
   max_vel_trans:  2.0
-  min_vel_trans:  -2.0
+  min_vel_trans:  0.1
 
   max_vel_theta: 0.5
   min_vel_theta: -0.5
 
-  acc_lim_x: 0.5
+  acc_lim_x: 1.0
   acc_lim_y: 0.0
-  acc_lim_theta: 1.0
+  acc_lim_theta: 1.5
   
 # Goal Tolerance Parametes
-  xy_goal_tolerance: 1.0 #1.0
+  xy_goal_tolerance: 0.3 #1.0
   yaw_goal_tolerance: 0.15
   latch_xy_goal_tolerance: false
 

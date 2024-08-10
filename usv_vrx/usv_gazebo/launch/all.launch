@@ -6,13 +6,18 @@
 
   <!-- Launch RViz for visualization -->
   <include file="$(find usv_gazebo)/launch/rviz.launch" />
+    
 
   <!-- Launch the navigation stack for the USV -->
-  <include file="$(find usv_gazebo)/launch/usv_navstack_triple_ekf.launch" /> <!--change as needed-->
+  <include file="$(find usv_gazebo)/launch/usv_navstack.launch" /> <!--change as needed-->
 
   <!-- Launch the control mechanisms for the USV -->
   <include file="$(find usv_control)/launch/control.launch" />
-  <!-- <include file="$(find usv_control)/launch/simple_controller.launch" /> -->
+  <!--include file="$(find usv_gazebo)/launch/thruster_controller.launch" /--> 
+
+  <include file="$(find usv_gazebo)/launch/usv_keydrive.launch" />
+
+   
 
 </launch>
 

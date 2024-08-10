@@ -422,47 +422,62 @@
     <parent link="front_mid_camera_link"/>
     <child link="front_mid_camera_link_optical"/>
   </joint>
-  <!-- Gazebo camera setup -->
+
+  
+  
+
+  
+  
   <gazebo reference="front_mid_camera_link">
-    <sensor name="front_mid_camera_sensor" type="camera">
-      <update_rate>30.0</update_rate>
-      <visualize>true</visualize>
-      <camera name="front_mid_camera_camera">
-        <horizontal_fov>1.3962634</horizontal_fov>
-        <image>
-          <width>1280</width>
-          <height>720</height>
-          <format>R8G8B8</format>
-        </image>
-        <clip>
-          <near>0.05</near>
-          <far>300</far>
-        </clip>
-        <noise>
-          <type>gaussian</type>
-          <!-- Noise is sampled independently per pixel on each frame.
-                 That pixel's noise value is added to each of its color
-                 channels, which at that point lie in the range [0,1]. -->
-          <mean>0.0</mean>
-          <stddev>0.007</stddev>
-        </noise>
-      </camera>
-      <plugin filename="libgazebo_ros_camera.so" name="camera_plugin_front_mid_camera">
-        <alwaysOn>true</alwaysOn>
-        <updateRate>0.0</updateRate>
-        <cameraName>sensors/cameras/front_mid_camera</cameraName>
-        <imageTopicName>image_raw</imageTopicName>
-        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-        <frameName>front_mid_camera_link_optical</frameName>
-        <hackBaseline>0.07</hackBaseline>
-        <distortionK1>0.0</distortionK1>
-        <distortionK2>0.0</distortionK2>
-        <distortionK3>0.0</distortionK3>
-        <distortionT1>0.0</distortionT1>
-        <distortionT2>0.0</distortionT2>
-      </plugin>
-    </sensor>
-  </gazebo>
+  <sensor name="camera69" type="depth">
+      <pose>0 0 0 0 0 0</pose>
+    <update_rate>30</update_rate>
+    <camera>
+      <horizontal_fov>2.0</horizontal_fov>
+      <image>
+        <width>1280</width>
+        <height>720</height>
+        <format>R8G8B8</format>
+      </image>
+      <clip>
+        <near>0.03</near>
+        <far>8</far>
+      </clip>
+    </camera>
+    <plugin name="camera_controller" filename="libgazebo_ros_depth_camera.so">
+      <baseline>0.01</baseline>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>1</updateRate>
+      <cameraName>camera69</cameraName>
+      <imageTopicName>/front_mid_camera_link/color/image_raw</imageTopicName>
+      <cameraInfoTopicName>/front_mid_camera_link/color/camera_info</cameraInfoTopicName>
+      <depthImageTopicName>/front_mid_camera_link/depth/image_raw</depthImageTopicName>
+      <depthImageInfoTopicName>/front_mid_camera_link/depth/camera_info</depthImageInfoTopicName>
+      <pointCloudTopicName>/front_mid_camera_link/depth/points</pointCloudTopicName>
+      <frameName>front_mid_camera_link</frameName>
+      <pointCloudCutoff>0.01</pointCloudCutoff>
+      <pointCloudCutoffMax>5.0</pointCloudCutoffMax>
+      <distortionK1>0.0</distortionK1>
+      <distortionK2>0.0</distortionK2>
+      <distortionK3>0.0</distortionK3>
+      <distortionT1>0.0</distortionT1>
+      <distortionT2>0.0</distortionT2>
+      <CxPrime>0</CxPrime>
+      <Cx>0</Cx>
+      <Cy>0</Cy>
+      <focalLength>0</focalLength>
+      <hackBaseline>0</hackBaseline>
+    </plugin>
+  </sensor>
+</gazebo>
+  
+ 
+  
+  
+  
+  
+  
+  
   <!-- Set color of post -->
   <gazebo reference="front_mid_camera_post_link">
     <material>Gazebo/Black</material>
@@ -616,7 +631,7 @@
   <!-- 3d lidar sensor -->
   <link name="lidar_wamv_link">
     <visual name="lidar_wamv_visual">
-      <origin rpy="0 0 0" xyz="0 0 -0.035"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://vrx_gazebo/models/3d_lidar/mesh/3d_lidar.dae"/>
       </geometry>
