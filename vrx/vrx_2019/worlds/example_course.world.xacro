@@ -50,12 +50,12 @@
     <!--include>
       <uri>model://simple_maze</uri>
       <pose>20.652985 14.555411 0 0 0 0.190745</pose>
-    </include>-->
+    </include>
     
     <include>
       <uri>model://onepath_maze</uri>
       <pose>-35.5535 64.792 0 0 0 -1.42</pose>
-    </include>
+    </include>-->
     
  
     <xacro:include filename="$(find vrx_gazebo)/worlds/xacros/usv_wind_plugin.xacro"/>

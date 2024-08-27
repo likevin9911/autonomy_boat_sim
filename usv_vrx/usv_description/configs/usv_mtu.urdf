@@ -328,12 +328,16 @@
       <wave_model>ocean_waves</wave_model>
     </plugin>
   </gazebo>
+  
+  
+  
+  
   <!-- Monocular Camera -->
   <link name="front_mid_camera_link">
     <visual name="front_mid_camera_visual">
-      <origin rpy="0 0 1.5707963267948966" xyz="-0.033 0 0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://vrx_gazebo/models/mono_camera/mesh/mono_camera.dae"/>
+        <mesh filename="package://vrx_gazebo/models/kinect/mesh/kinect.dae"/>
       </geometry>
     </visual>
     <collision name="front_mid_camera_lens_collision">
@@ -418,7 +422,7 @@
   <!-- Camera to optical frame joint.  This is oriented to convert between ENU
          and camera conventions -->
   <joint name="front_mid_camera_to_front_mid_camera_link_optical_joint" type="fixed">
-    <origin rpy="-1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0"/>
+    <origin rpy="0 -1.57 -1.57" xyz="0 0 0"/>
     <parent link="front_mid_camera_link"/>
     <child link="front_mid_camera_link_optical"/>
   </joint>
@@ -429,46 +433,47 @@
   
   
   <gazebo reference="front_mid_camera_link">
-  <sensor name="camera69" type="depth">
-      <pose>0 0 0 0 0 0</pose>
-    <update_rate>30</update_rate>
-    <camera>
-      <horizontal_fov>2.0</horizontal_fov>
-      <image>
-        <width>1280</width>
-        <height>720</height>
-        <format>R8G8B8</format>
-      </image>
-      <clip>
-        <near>0.03</near>
-        <far>8</far>
-      </clip>
-    </camera>
-    <plugin name="camera_controller" filename="libgazebo_ros_depth_camera.so">
-      <baseline>0.01</baseline>
-      <alwaysOn>true</alwaysOn>
-      <updateRate>1</updateRate>
-      <cameraName>camera69</cameraName>
-      <imageTopicName>/front_mid_camera_link/color/image_raw</imageTopicName>
-      <cameraInfoTopicName>/front_mid_camera_link/color/camera_info</cameraInfoTopicName>
-      <depthImageTopicName>/front_mid_camera_link/depth/image_raw</depthImageTopicName>
-      <depthImageInfoTopicName>/front_mid_camera_link/depth/camera_info</depthImageInfoTopicName>
-      <pointCloudTopicName>/front_mid_camera_link/depth/points</pointCloudTopicName>
-      <frameName>front_mid_camera_link</frameName>
-      <pointCloudCutoff>0.01</pointCloudCutoff>
-      <pointCloudCutoffMax>5.0</pointCloudCutoffMax>
-      <distortionK1>0.0</distortionK1>
-      <distortionK2>0.0</distortionK2>
-      <distortionK3>0.0</distortionK3>
-      <distortionT1>0.0</distortionT1>
-      <distortionT2>0.0</distortionT2>
-      <CxPrime>0</CxPrime>
-      <Cx>0</Cx>
-      <Cy>0</Cy>
-      <focalLength>0</focalLength>
-      <hackBaseline>0</hackBaseline>
-    </plugin>
-  </sensor>
+  <sensor name="camera" type="depth">
+        <update_rate>20</update_rate>
+        <camera>
+          <horizontal_fov>1.047198</horizontal_fov>
+          <image>
+            <width>1280</width>
+            <height>720</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>3000</far>
+          </clip>
+        </camera>
+        <plugin name="camera_plugin" filename="libgazebo_ros_openni_kinect.so">
+          <baseline>0.2</baseline>
+          <alwaysOn>true</alwaysOn>
+          <!-- Keep this zero, update_rate in the parent <sensor> tag
+            will control the frame rate. -->
+          <updateRate>0.0</updateRate>
+          <cameraName>camera_ir</cameraName>
+          <imageTopicName>/camera/color/image_raw</imageTopicName>
+          <cameraInfoTopicName>/camera/color/camera_info</cameraInfoTopicName>
+          <depthImageTopicName>/camera/depth/image_raw</depthImageTopicName>
+          <depthImageCameraInfoTopicName>/camera/depth/camera_info</depthImageCameraInfoTopicName>
+          <pointCloudTopicName>/camera/depth/points</pointCloudTopicName>
+          <frameName>front_mid_camera_link</frameName>
+          <pointCloudCutoff>0.5</pointCloudCutoff>
+          <pointCloudCutoffMax>3.0</pointCloudCutoffMax>
+          <distortionK1>0</distortionK1>
+          <distortionK2>0</distortionK2>
+          <distortionK3>0</distortionK3>
+          <distortionT1>0</distortionT1>
+          <distortionT2>0</distortionT2>
+          <CxPrime>0</CxPrime>
+          <Cx>0</Cx>
+          <Cy>0</Cy>
+          <focalLength>0</focalLength>
+          <hackBaseline>0</hackBaseline>
+        </plugin>
+      </sensor>
 </gazebo>
   
  
@@ -728,7 +733,7 @@
         <noise>
           <type>gaussian</type>
           <mean>0.0</mean>
-          <stddev>0.01</stddev>
+          <stddev>0.0</stddev>
         </noise>
       </ray>
       <plugin filename="libgazebo_ros_velodyne_gpu_laser.so" name="lidar_wamv_plugin">

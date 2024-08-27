@@ -4,8 +4,8 @@
   <!-- For GMAPPING: comment out "MAP", "AMCL", "MOVE_BASE", and "Global_planner" -->
 
 <!--TODO-->
-  <node pkg="tf" type="static_transform_publisher" name="lidar" args="0.04 0 0.7 0 0 0 base_link lidar_wamv_link 100"/>
-  <node pkg="tf" type="static_transform_publisher" name="camera" args="0.02 0 0.027 0 0 0  base_link front_mid_camera_link 100" />
+  <node pkg="tf" type="static_transform_publisher" name="lidar" args="0 0 0.9 0 0 0 base_link lidar_wamv_link 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="camera" args="1 0 0.8 -1.57 0 -1.57 base_link front_mid_camera_link 100" />
  
 
   <!-- Map Server -->
@@ -13,11 +13,11 @@
   <param name="frame_id" value="map"/>
   </node>
 
-  <!-- 1 EKF-->
-  <node pkg="tf2_ros" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 map odom" /> 
-
-  <!-- AMCL -->
-  <include file="$(find usv_gazebo)/launch/amcl.launch"/>
+  <!-- 1 EKF--> 
+  <node pkg="tf2_ros" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 map odom" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="rtabmap_to_odom" args="0 0 0 0 0 0 map rtabmap/odom" />
+  <!-- AMCL
+  <include file="$(find usv_gazebo)/launch/amcl.launch"/> -->
 
 
   # Check Thruster
